@@ -1,0 +1,312 @@
+<!--110550143 洪巧芸 第II次作業10/11
+110550143 Ciao-Yun Hong The Second Homework 10/11-->
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 2</title>
+    <!-- 引入外部 CSS 檔案 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="buttons">
+            <a href="index.html">
+                <button>AGAIN</button>
+            </a>
+            <a href="lut.html">
+                <button>LUT</button>
+            </a>
+            <a href="method.html">
+                <button>METHOD</button>
+            </a>
+        </div>
+    </header>
+
+
+    <div class="main-container">
+        <!-- 表單容器 -->
+        <div class="form-container">
+            <label for="numbers">cin 8 integers (1~999):</label>
+            <input type="text" id="numbers" placeholder="split by comma, e.g. 23,45,67">
+            <button1 onclick="processNumbers()">SUBMIT</button1>
+        </div>
+
+        <!-- 結果顯示區域 -->
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function processNumbers() {
+            // 取得輸入值並去除所有空白，然後以逗號分隔
+            let input = document.getElementById('numbers').value.replace(/\s+/g, '');
+            let index = 0;
+            let numCount = 0;
+            let nums = "";
+            
+            // 檢查每個分隔後的數字是否合法，並累積至 nums 中
+            while (index < input.length) {
+                let numStr = "";
+                while (index < input.length && input[index] !== ',') {
+                    numStr += input[index];
+                    index++;
+                }
+                // 跳過逗號
+                index++;
+
+                // 將字串轉換為數字並進行範圍檢查
+                let num = parseInt(numStr.trim());
+                if (isNaN(num) || num < 1 || num > 999) {
+                    alert('The number is out of range!\nPlease enter numbers between 1 and 999.');
+                    return;
+                }
+
+                // 累積有效的數字，並記錄數字個數
+                nums += num + ",";
+                numCount++;
+            }
+
+            // 檢查輸入的有效數字數量是否為 8 個
+            if (numCount !== 8) {
+                alert('Be sure you cin 8 numbers!');
+                return;
+            }
+
+            // 移除最後一個多餘的逗號
+            if (nums.endsWith(",")) {
+                nums = nums.slice(0, -1);
+            }
+
+            // 顯示圖片
+            let resultDiv = document.getElementById('results');
+            resultDiv.innerHTML = '<h2>Numbers show by images</h2>';
+            resultDiv.innerHTML += displayNumberWithImages(nums);
+
+            // 計算最大值、最小值、中位數
+            let maxNum = findMax(nums);
+            let minNum = findMin(nums);
+            let medianNum = findMedian(nums);
+
+            resultDiv.innerHTML += `<h2>Maximum:</h2>` + displayNumberWithImages(maxNum);
+            resultDiv.innerHTML += `<h2>Minimum:</h2>` + displayNumberWithImages(minNum);
+            resultDiv.innerHTML += `<h2>Median:</h2>` + displayNumberWithImages(medianNum);
+
+            // 顯示質數、阿姆斯壯數、費波那契數
+            resultDiv.innerHTML += `<h2>Prime numbers:</h2>` + displaySpecialNumbers(nums, isPrime);
+            resultDiv.innerHTML += `<h2>Armstrong numbers:</h2>` + displaySpecialNumbers(nums, isArmstrong);
+            resultDiv.innerHTML += `<h2>Fibonacci sequence:</h2>` + displaySpecialNumbers(nums, isFibonacci);
+        }
+
+        // 顯示數字圖片的函式
+        // 顯示數字圖片的函式（包含小數點的處理）
+        function displayNumberWithImages(numberStr) {
+            let index = 0;
+            let images = "";
+            while (index < numberStr.length) {
+                let digit = numberStr[index];
+                if (digit !== ',') {
+                    if (digit === '.') {
+                        images += `<img src="images/dot.png" alt="dot" class="number-image">`;
+                    } else {
+                        images += `<img src="images/${digit}.png" class="number-image">`;
+                    }
+                } else {
+                    images += `<img src="images/comma.png" class="comma-image">`;
+                }
+                index++;
+            }
+            return images;
+        }
+
+
+        // 顯示多個特殊數字（質數、阿姆斯壯數、費波那契數等）
+        function displaySpecialNumbers(nums, conditionFunc) {
+            let index = 0;
+            let first = 1;
+            let images = "";
+            let numStr = "";
+
+            while (index <= nums.length) {
+                if (index === nums.length || nums[index] === ',') {
+                    let num = parseInt(numStr.trim());
+                    if (conditionFunc(num)) {
+                        if (!first) {
+                            images += `<img src="images/comma.png" class="comma-image">`;
+                        }
+                        images += displayNumberWithImages(numStr, true);
+                        first = 0;
+                    }
+                    numStr = "";
+                } else {
+                    numStr += nums[index];
+                }
+                index++;
+            }
+
+            // 如果 images 為空，表示沒有符合條件的數字，顯示 "None"
+            if (images === "") {
+                images = `<span style="font-size: 20px; color: white;">None</span>`;
+            }
+
+            return images;
+        }
+
+
+        // 找最大值
+        function findMax(nums) {
+            let max = -Infinity;
+            let index = 0;
+            let numStr = "";
+            while (index <= nums.length) {
+                if (index === nums.length || nums[index] === ',') {
+                    let num = parseInt(numStr.trim());
+                    if (num > max) {
+                        max = num;
+                    }
+                    numStr = "";
+                } else {
+                    numStr += nums[index];
+                }
+                index++;
+            }
+            return max.toString();
+        }
+
+        // 找最小值
+        function findMin(nums) {
+            let min = Infinity;
+            let index = 0;
+            let numStr = "";
+            while (index <= nums.length) {
+                if (index === nums.length || nums[index] === ',') {
+                    let num = parseInt(numStr.trim());
+                    if (num < min) {
+                        min = num;
+                    }
+                    numStr = "";
+                } else {
+                    numStr += nums[index];
+                }
+                index++;
+            }
+            return min.toString();
+        }
+
+        // 找中位數-----
+        function findMedian(nums) {
+            // 先用插入排序得到排序後的字符串
+            let sortedStr = "";
+            let index = 0;
+            let numStr = "";
+            
+            while (index <= nums.length) {
+                if (index === nums.length || nums[index] === ',') {
+                    let num = parseInt(numStr.trim());
+                    if (sortedStr === "") {
+                        sortedStr = num.toString();
+                    } else {
+                        sortedStr = insertSorted(sortedStr, num);
+                    }
+                    numStr = "";
+                } else {
+                    numStr += nums[index];
+                }
+                index++;
+            }
+
+            // 找到第4和第5個數字
+            let count = 0;
+            let fourth = 0;
+            let fifth = 0;
+            index = 0;
+            numStr = "";
+            
+            while (index <= sortedStr.length) {
+                if (index === sortedStr.length || sortedStr[index] === ',') {
+                    count++;
+                    if (count === 4) fourth = parseInt(numStr);
+                    if (count === 5) fifth = parseInt(numStr);
+                    numStr = "";
+                } else {
+                    numStr += sortedStr[index];
+                }
+                index++;
+            }
+            
+            return ((fourth + fifth) / 2).toString();
+        }
+
+        // 將數字插入到排序好的字串中
+        function insertSorted(sortedStr, num) {
+            let index = 0;
+            let resultStr = "";
+            let inserted = false;
+            let currentNumStr = "";
+
+            while (index <= sortedStr.length) {
+                if (index === sortedStr.length || sortedStr[index] === ',') {
+                    let currentNum = parseInt(currentNumStr.trim());
+                    if (!inserted && num <= currentNum) {
+                        resultStr += (resultStr ? ',' : '') + num.toString() + ',' + currentNumStr;
+                        inserted = true;
+                    } else {
+                        resultStr += (resultStr ? ',' : '') + currentNumStr;
+                    }
+                    currentNumStr = "";
+                } else {
+                    currentNumStr += sortedStr[index];
+                }
+                index++;
+            }
+
+            if (!inserted) {
+                resultStr += (resultStr ? ',' : '') + num.toString();
+            }
+
+            return resultStr;
+        }
+
+
+        function isPrime(num) {
+            if (num < 2) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function isArmstrong(num) {
+            let sum = 0;
+            let tempNum = num;
+            let digits = num.toString().length;
+            while (tempNum > 0) {
+                let digit = tempNum % 10;
+                sum += Math.pow(digit, digits);
+                tempNum = Math.floor(tempNum / 10);
+            }
+            return sum === num;
+        }
+
+        function isFibonacci(num) {
+            let pre = 1;
+            let recent = 1;
+            if(num===1)
+                return true;
+            while(recent<num) {
+                let temp = pre;
+                pre = recent;
+                recent += temp;
+                if(recent === num)
+                    return true;
+            }
+            return false;
+        }
+    </script>
+
+<!-- <footer>
+    <p>2024 Cassidy Hong. Write for homework.</p>
+</footer> -->
+</body>
+</html>

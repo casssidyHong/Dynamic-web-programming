@@ -1,0 +1,123 @@
+/* <!--110550143 洪巧芸 第II次作業10/11
+110550143 Ciao-Yun Hong The Second Homework 10/11--> */
+
+body {
+    background-color: black;
+    font-family: Arial, sans-serif;
+}
+.top-nav {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    padding: 20px 0; 
+    height: 50px;
+    z-index: 1000; 
+    display: flex; 
+    justify-content: flex-end;
+    align-items: center;
+}.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: fixed;
+    right: 30px; 
+}
+.buttons button {
+    background-color: transparent; 
+    color: white; 
+    border: 1px solid white; 
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    font-size: 15px; 
+    font-weight: 900;
+    font-family: Arial, sans-serif; 
+    transition: color 0.3s, border-color 0.3s; 
+}
+.buttons button:hover {
+    color: #ddd; 
+    border-color: #ddd; 
+}
+
+h1 {
+    text-align: center;
+    font-family: Comic Black;
+    font-weight: blod;
+    font-size: 50px;
+    margin-top: 35px;
+    color: #f2f2f2;
+}
+
+table {
+    border-collapse: separate; 
+    border-spacing: 0;
+    margin: 30px auto;
+    background-color: black;
+    border: 2px solid white; 
+    border-radius: 15px 15px 0 0; 
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0; 
+    width: 50%;
+    margin: 30px auto;
+    background-color: black;
+    border: 2px solid white; 
+    border-radius: 15px 15px 0 0; 
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2); 
+}
+
+th, td {
+    border: 1px solid white; 
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    color: white; 
+    font-weight: bold; 
+    vertical-align: middle; 
+}
+
+th {
+    background-color: white;
+    color: black;
+}
+
+td {
+    font-weight: blod;
+    font-size: 27px;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    display: inline-block; 
+    vertical-align: middle;
+}
+
+th:first-child {
+    border-top-left-radius: 15px; 
+}
+
+th:last-child {
+    border-top-right-radius: 15px; 
+}
+
+
+.number-image {
+    width: 40px;
+    height: 50px;
+}
+
+footer {
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(254, 254, 254, 0.559);
+    color: white;
+}
