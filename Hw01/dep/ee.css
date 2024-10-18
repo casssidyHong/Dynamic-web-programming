@@ -1,0 +1,134 @@
+/*<!--
+110550143 洪巧芸 第一次作業 9/26
+110550143 Ciao-Yun Hong The First Homework 9/26 -->
+*/
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%; 
+    overflow-x: hidden; 
+}
+
+.top-nav {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px 0; 
+    height: 50px;
+    z-index: 1000; 
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: fixed;
+    right: 30px; 
+}
+.buttons button {
+    background-color: transparent; 
+    color: white; 
+    border: 1px solid white; 
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    font-size: 15px; 
+    font-weight: 900;
+    font-family: Arial, sans-serif; 
+    transition: color 0.3s, border-color 0.3s; 
+}
+.buttons button:hover {
+    color: #ddd; 
+    border-color: #ddd; 
+}
+
+.header-section {
+    position: relative;
+    height: 100vh; 
+    background: url('img/ee.jpg') no-repeat center center/cover; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+.header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+}
+.header-section h1, .header-section p {
+    position: relative;
+    z-index: 2;
+    font-family: Palatino;
+}
+.header-section h1 {
+    color: white;
+    font-style: normal;
+    font-size: 4em;
+    margin: 0;
+}
+.header-section a {
+    text-decoration: none;
+}
+.header-section p {
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+.header-section h1:hover {
+    color: rgb(196, 196, 196);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-height: 800px;
+    width: 100vw;
+}
+.image-container {
+    max-height: 800px;
+}
+.static-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;    
+    padding: 20px;
+    background-color: rgba(182, 255, 236, 0.8);
+    text-align: left; 
+    color: black;
+}
+.main-text h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+.main-text ul {
+    list-style-type: disc; 
+    padding-left: 20px;
+    font-size: 1.5em;
+    margin: 0; 
+}
+.main-text li {
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-align: left;
+}

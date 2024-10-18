@@ -1,0 +1,126 @@
+/*<!--
+110550143 洪巧芸 第一次作業 9/26
+110550143 Ciao-Yun Hong The First Homework 9/26 -->
+*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.top-nav {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%; 
+    background-color: rgba(0, 0, 0); 
+    padding: 10px 0; 
+    height: 110px;
+    z-index: 1000; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+.top-nav h1 {
+    font-size: 50px;
+    color: white;
+    margin-left: 50px; 
+    text-align: left; 
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    position: fixed;
+    right: 30px;
+    margin-bottom: 30px;
+}
+.buttons button {
+    background-color: transparent; 
+    color: white; 
+    border: 1px solid white; 
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-align: center;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    font-size: 15px; 
+    font-weight: 900;
+    font-family: Arial, sans-serif; 
+    transition: color 0.3s, border-color 0.3s; 
+}
+.buttons button:hover {
+    color: #ddd;
+    border-color: #ddd; 
+}
+
+
+.flexbox {
+    background-color: black;
+    width: 100vw; 
+    height: 100vh; 
+    display: -webkit-box;
+    display: box;
+    -webkit-box-orient: horizontal;
+    box-orient: horizontal;
+    justify-content: space-around;
+    align-items: center; 
+    margin-top: 120px; 
+}
+.flexbox > div {
+    -webkit-transition: 1s ease-out;
+    transition: 1s ease-out;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    width: 20vw; 
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 10px 10px 10px dimgrey;
+    text-align: left; 
+}
+.flexbox > div img {
+    width: 200px;
+    height: 110px; 
+    object-fit: cover;
+    display: block; 
+    margin: 0 auto 10px;
+}
+.flexbox > div:nth-child(1) { background-color: white; }
+.flexbox > div:nth-child(2) { background-color: white; }
+.flexbox > div:nth-child(3) { background-color: white; }
+.flexbox > div:nth-child(4) { background-color: white; }
+.flexbox > div:nth-child(5) { background-color: white; }
+.flexbox > div:hover {
+    width: 30vw;
+    color: white;
+    font-weight: bold;
+    background-size: cover; 
+    background-position: center; 
+}
+.flexbox > div:nth-child(1):hover {
+    background-image: url('travel_im/1.jpg');
+}
+.flexbox > div:nth-child(2):hover { 
+    background-image: url('travel_im/2.jpg');
+}
+.flexbox > div:nth-child(3):hover { 
+    background-image: url('travel_im/3.jpg');
+ }
+.flexbox > div:nth-child(4):hover { 
+    background-image: url('travel_im/5.jpg');
+ }
+.flexbox > div:nth-child(5):hover { 
+    background-image: url('travel_im/4.jpg');
+}
+p {
+    height: auto; 
+    overflow: hidden;
+    font-family: "Rosario";
+    text-align: left;
+    margin: 5px 0;
+    padding: 0; 
+    line-height: 1.6;
+}
+
+

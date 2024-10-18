@@ -1,0 +1,102 @@
+/*<!--
+110550143 洪巧芸 第一次作業 9/26
+110550143 Ciao-Yun Hong The First Homework 9/26 -->
+*/
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+header {
+    background-color: black;
+    color: white;
+    padding: 40px 30px 20px 20px;
+    text-align: center;
+}
+header h1 {
+    font-size: 3.5em;
+    margin: 0;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+.row {
+    display: flex;
+    justify-content: space-between; 
+    flex-wrap: nowrap; 
+}
+.column {
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 450px;
+}
+.columnn {
+    background-color: white;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 1500px;
+}
+.about-me {
+    width: 45%;
+}
+.right-side {
+    width: 45%; 
+}
+.sub-column {
+    margin-bottom: 20px;
+}
+.indented-item {
+    padding-left: 20px; 
+    list-style: none;
+}
+
+.column h2 {
+    font-size: 20px;
+    color: black;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.column ul {
+    list-style-type: none;
+    padding: 0;
+}
+.column ul li {
+    margin-bottom: 10px;
+}
+.column ul li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+.column ul li a:hover {
+    text-decoration: underline;
+}
+
+.numbered-list {
+    padding-left: 20px; 
+    list-style-type: decimal; 
+}
+.numbered-list li {
+    margin-bottom: 10px;
+    font-size: 18px; 
+    color: #333;
+}
