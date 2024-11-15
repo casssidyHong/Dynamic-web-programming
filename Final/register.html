@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用戶註冊</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .register-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .register-link a {
+            color: #2196F3;
+            text-decoration: none;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        .password-match-message {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>用戶註冊</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="username">用戶名：</label>
+                <input type="text" id="username" name="username" required minlength="3">
+            </div>
+            <div class="form-group">
+                <label for="email">電子郵件：</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密碼：</label>
+                <input type="password" id="password" name="password" required minlength="6">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">確認密碼：</label>
+                <input type="password" id="confirm_password" name="confirm_password" required>
+                <div id="passwordMatch" class="password-match-message"></div>
+            </div>
+            <button type="submit" class="btn" id="registerButton">註冊</button>
+            <div id="message" class="message error" style="display: none;"></div>
+        </form>
+        <div class="register-link">
+            已有帳號？<a href="login.html">返回登入</a>
+        </div>
+    </div>
+
+    <script>
+        // 密碼確認驗證
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const passwordMatch = document.getElementById('passwordMatch');
+
+        function validatePassword() {
+            if (password.value !== confirmPassword.value) {
+                passwordMatch.textContent = '密碼不匹配';
+                passwordMatch.style.color = '#ff0000';
+                return false;
+            } else {
+                passwordMatch.textContent = '密碼匹配';
+                passwordMatch.style.color = '#4CAF50';
+                return true;
+            }
+        }
+
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validatePassword);
+
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // 檢查密碼是否匹配
+            if (!validatePassword()) {
+                const messageDiv = document.getElementById('message');
+                messageDiv.textContent = '請確保密碼匹配';
+                messageDiv.style.display = 'block';
+                return;
+            }
+
+            const registerButton = document.getElementById('registerButton');
+            const messageDiv = document.getElementById('message');
+
+            // Disable button and show loading state
+            registerButton.disabled = true;
+            registerButton.textContent = '註冊中...';
+
+            // Clear previous error messages
+            messageDiv.style.display = 'none';
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch('register.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('網路請求失敗');
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = 'register_success.php';
+                } else {
+                    messageDiv.textContent = data.message || '註冊失敗，請稍後再試';
+                    messageDiv.style.display = 'block';
+                }
+            } catch (error) {
+                messageDiv.textContent = '發生錯誤，請稍後再試';
+                messageDiv.style.display = 'block';
+                console.error('Error:', error);
+            } finally {
+                // Re-enable button
+                registerButton.disabled = false;
+                registerButton.textContent = '註冊';
+            }
+        });
+    </script>
+</body>
+</html>
